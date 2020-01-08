@@ -1,0 +1,18 @@
+<h1 class="mat-headline" style="padding-top: 100px">UrbanSisters</h1>
+<h2 class="mat-title">Se connecter</h2>
+<form class="form-signin" [formGroup]="loginForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Adresse mail</mat-label>
+    <input matInput formControlName="email" placeholder="Adresse mail" type="email" required autofocus>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="outline">
+    <mat-label>Mot de passe</mat-label>
+    <input matInput formControlName="password" placeholder="Mot de passe" type="password" required>
+  </mat-form-field>
+  <br>
+  <mat-checkbox color="primary" formControlName="rememberMe">Se souvenir de moi</mat-checkbox>
+  <mat-progress-spinner *ngIf="loading" color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+  <br>
+  <button style="margin-top: 10px" mat-raised-button color="primary" type="submit" (click)="login(); loading = true;" [disabled]="!loginForm.valid || loading">Se connecter</button>
+</form>

@@ -1,0 +1,8 @@
+<h1>Bienvenue sur le BackOffice d'UrbanSisters!</h1>
+<p>Ce back office vous permet de gérer vos rendez-vous avec vos clients!</p>
+<div *ngIf="!authService.isRelookeuse()">
+  <p>Il semblerait que vous ne soyez pas une Relookeuse!</p>
+  <p>Pour utiliser nos services en tant que client vous devez utiliser l'application qui est disponible sur le PlayStore</p>
+  <p>Si vous voulez vous inscrire en tant que Relookeuse, cliquez sur le boutons ci-dessous!</p>
+  <button style="margin-top: 50px" mat-raised-button color="primary" routerLink="/relookeuseInscription">Devenir relookeuse !</button>
+</div>

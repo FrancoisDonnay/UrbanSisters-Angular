@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar">
+    <span>UrbanSisters</span>
+    <button mat-button [matMenuTriggerFor]="belowMenu">About Us</button>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <button mat-menu-item>Project Plan</button>
+      <button mat-menu-item>Current Progress</button>
+    </mat-menu>
+
+    <button mat-button (click)="authService.logout(); router.navigate(['login']);">Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,13 @@
+export { Appointment } from './models/appointment';
+export { AppointmentPage } from './models/appointment-page';
+export { ProblemDetails } from './models/problem-details';
+export { AppointmentRequest } from './models/appointment-request';
+export { Rating } from './models/rating';
+export { UserInscription } from './models/user-inscription';
+export { ApiError } from './models/api-error';
+export { JwtToken } from './models/jwt-token';
+export { Login } from './models/login';
+export { Relookeuse } from './models/relookeuse';
+export { RelookeusePage } from './models/relookeuse-page';
+export { User } from './models/user';
+export { UserChange } from './models/user-change';

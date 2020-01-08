@@ -1,0 +1,15 @@
+form, h1, h2
+{
+  width: 100%;
+  text-align: center;
+}
+
+mat-form-field
+{
+  width: 300px
+}
+
+mat-progress-spinner
+{
+  margin: 10px auto;
+}
