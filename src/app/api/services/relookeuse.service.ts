@@ -8,11 +8,14 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { RelookeusePage } from '../models/relookeuse-page';
+import { JwtToken } from '../models/jwt-token';
+import { RelookeuseInscription } from '../models/relookeuse-inscription';
 @Injectable({
   providedIn: 'root',
 })
 class RelookeuseService extends __BaseService {
   static readonly getApiRelookeusePath = '/api/Relookeuse';
+  static readonly postApiRelookeusePath = '/api/Relookeuse';
   static readonly getApiRelookeuseIdPath = '/api/Relookeuse/{id}';
   static readonly postApiRelookeusePictureIdPath = '/api/Relookeuse/picture/{id}';
   static readonly patchApiRelookeusePictureIdPath = '/api/Relookeuse/picture/{id}';
@@ -68,6 +71,42 @@ class RelookeuseService extends __BaseService {
   getApiRelookeuse(params: RelookeuseService.GetApiRelookeuseParams): __Observable<RelookeusePage> {
     return this.getApiRelookeuseResponse(params).pipe(
       __map(_r => _r.body as RelookeusePage)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postApiRelookeuseResponse(body?: RelookeuseInscription): __Observable<__StrictHttpResponse<JwtToken>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'POST',
+      this.rootUrl + `/api/Relookeuse`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<JwtToken>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postApiRelookeuse(body?: RelookeuseInscription): __Observable<JwtToken> {
+    return this.postApiRelookeuseResponse(body).pipe(
+      __map(_r => _r.body as JwtToken)
     );
   }
 

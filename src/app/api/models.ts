@@ -9,5 +9,6 @@ export { JwtToken } from './models/jwt-token';
 export { Login } from './models/login';
 export { Relookeuse } from './models/relookeuse';
 export { RelookeusePage } from './models/relookeuse-page';
+export { RelookeuseInscription } from './models/relookeuse-inscription';
 export { User } from './models/user';
 export { UserChange } from './models/user-change';

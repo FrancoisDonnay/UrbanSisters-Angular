@@ -1,33 +1,54 @@
 <mat-horizontal-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+  <mat-step [stepControl]="inscriptionGroup" editable="false">
+    <form [formGroup]="inscriptionGroup">
+      <ng-template matStepLabel>Inscrivez-vous en tant que relookeuse</ng-template>
+      <div class="content">
+        <mat-slide-toggle color="primary" #sliderPro>Etes-vous professionel dans le milieu du relooking</mat-slide-toggle>
+        <br>
+        <mat-form-field style="padding-top: 10px">
+          <textarea matInput placeholder="Votre description" formControlName="description"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button (click)="sendInscription()" [disabled]="!inscriptionGroup.valid || loading">Next</button>
+        </div>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
+  <mat-step optional [editable] = !hasProfilePicture>
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
+      <ng-template matStepLabel>Selectionnez une photo de profil</ng-template>
+        <input type="file" id="userFile" formControlName="profilPicture" (change)="onSelectFile($event)">
       <div>
-        <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
+  <mat-step optional [editable]="!hasTarifs">
+    <ng-template matStepLabel>Ajouter vos tarifs</ng-template>
     You are now done.
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step optional [editable]="!hasAvailabily">
+    <ng-template matStepLabel>Ajouter vos horaires</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step optional [editable]="!hasPortfolioPictures">
+    <ng-template matStepLabel>Ajouter des photos dans votre portefolio</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Bravo</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperNext>Next</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

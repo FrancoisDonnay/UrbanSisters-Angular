@@ -10,13 +10,14 @@ import {ApiModule} from './api/api.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatButtonModule,
   MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule, MatProgressSpinnerModule,
-  MatSelectModule, MatStepperModule,
+  MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule,
   MatToolbarModule
 } from '@angular/material';
 import { RelookeuseInscriptionComponent } from './relookeuse-inscription/relookeuse-inscription.component';
@@ -55,14 +56,17 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   entryComponents:[
     InfoDialogComponent
   ],
   providers: [
     RequestInterceptor,
-    API_INTERCEPTOR_PROVIDER
+    API_INTERCEPTOR_PROVIDER,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 10000}}
   ],
   bootstrap: [AppComponent]
 })

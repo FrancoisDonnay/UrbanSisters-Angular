@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {JwtToken} from './api/models/jwt-token';
 import decode from 'jwt-decode';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AuthenticationService {
 
   private accessToken: JwtToken;
   private roles: Array<string>;
-  constructor() { }
+  constructor(private router: Router) { }
 
   public setToken(token: JwtToken, rememberMe: boolean) {
     this.accessToken = token;
@@ -27,7 +28,14 @@ export class AuthenticationService {
     if (rememberMe) {
       localStorage.setItem('token', token.access_token);
       localStorage.setItem('tokenExpiration', token.expire_at.toString());
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('tokenExpiration');
     }
+  }
+
+  public updateToken(token: JwtToken) {
+    this.setToken(token, localStorage.hasOwnProperty('token') && localStorage.hasOwnProperty('tokenExpiration'));
   }
 
   public getToken(): JwtToken {
@@ -59,6 +67,7 @@ export class AuthenticationService {
     this.accessToken = null;
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpiration');
+    this.router.navigate(['login']);
   }
 
   public isAdmin(): boolean {
