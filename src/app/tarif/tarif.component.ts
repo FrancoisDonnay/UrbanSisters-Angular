@@ -33,6 +33,11 @@ export class TarifComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result === undefined)
+      {
+        return;
+      }
+
       this.tarifApi.patchApiTarif({service: this.tarif.service, rowVersion: this.tarif.rowVersion, price: result}).subscribe(ok => {
         this.tarif.price = result;
         this.tarif.rowVersion = ok.rowVersion;

@@ -1,7 +1,9 @@
 export { AppointmentService } from './services/appointment.service';
+export { AvailabilityService } from './services/availability.service';
 export { DefaultService } from './services/default.service';
 export { InscriptionService } from './services/inscription.service';
 export { LoginService } from './services/login.service';
+export { PortfolioService } from './services/portfolio.service';
 export { RelookeuseService } from './services/relookeuse.service';
 export { TarifService } from './services/tarif.service';
 export { UserService } from './services/user.service';

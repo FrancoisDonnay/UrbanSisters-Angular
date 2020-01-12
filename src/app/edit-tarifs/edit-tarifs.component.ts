@@ -84,6 +84,4 @@ export class EditTarifsComponent implements OnInit {
       }
     });
   }
-
-
 }

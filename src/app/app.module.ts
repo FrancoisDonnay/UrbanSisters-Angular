@@ -30,6 +30,8 @@ import { TarifComponent } from './tarif/tarif.component';
 import { EditAvailabilitiesComponent } from './edit-availabilities/edit-availabilities.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { EditTarifPriceDialogComponent } from './edit-tarif-price-dialog/edit-tarif-price-dialog.component';
+import { EditAvailabilityHourDialogComponent } from './edit-availability-hour-dialog/edit-availability-hour-dialog.component';
+import { DayOfWeekPipe } from './day-of-week.pipe';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -50,7 +52,9 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     TarifComponent,
     EditAvailabilitiesComponent,
     AvailabilityComponent,
-    EditTarifPriceDialogComponent
+    EditTarifPriceDialogComponent,
+    EditAvailabilityHourDialogComponent,
+    DayOfWeekPipe
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
   ],
   entryComponents:[
     InfoDialogComponent,
-    EditTarifPriceDialogComponent
+    EditTarifPriceDialogComponent,
+    EditAvailabilityHourDialogComponent
   ],
   providers: [
     RequestInterceptor,

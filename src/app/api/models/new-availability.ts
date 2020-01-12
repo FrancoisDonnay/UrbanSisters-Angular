@@ -1,8 +1,6 @@
 /* tslint:disable */
-export interface Availability {
-  id: number;
+export interface NewAvailability {
   dayOfWeek: number;
   startTime: string;
   endTime: string;
-  rowVersion: string;
 }

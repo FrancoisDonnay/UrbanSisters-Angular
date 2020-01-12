@@ -35,10 +35,12 @@
   </mat-step>
   <mat-step optional>
     <ng-template matStepLabel>Ajouter vos horaires</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Précédent</button>
-      <button mat-button matStepperNext>Suivant</button>
+    <div class="content">
+      <app-edit-availabilities newRelookeuse="true"></app-edit-availabilities>
+      <div>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button mat-button matStepperNext>Suivant</button>
+      </div>
     </div>
   </mat-step>
   <mat-step optional>
