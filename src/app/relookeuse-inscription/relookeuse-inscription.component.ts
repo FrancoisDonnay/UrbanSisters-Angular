@@ -21,26 +21,20 @@ export class RelookeuseInscriptionComponent implements OnInit {
   @ViewChild('stepper', {static: true}) stepper: MatHorizontalStepper;
   @ViewChild('sliderPro', {static: true}) sliderPro: MatSlideToggle;
   inscriptionGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  hasProfilePicture: boolean = false;
-  hasTarifs: boolean = false;
-  hasAvailabily: boolean = false;
-  hasPortfolioPictures: boolean = false;
-  loading: boolean = false;
+  loading = false;
+  rowVersion: string;
 
   ngOnInit() {
     this.inscriptionGroup = new FormGroup({
       description: new FormControl(null, Validators.required)
-    });
-    this.secondFormGroup = new FormGroup({
-      profilPicture: new FormControl(null, Validators.required),
     });
   }
 
   sendInscription() {
     this.relookeuseApi.postApiRelookeuse({description: this.inscriptionGroup.value.description, isPro: this.sliderPro.checked}).subscribe(
       ok => {
-      this.authService.updateToken({access_token: ok.access_token, expire_at: ok.expire_at});
+      this.authService.updateToken({access_token: ok.newToken.access_token, expire_at: ok.newToken.expire_at});
+      this.rowVersion = ok.rowVersion;
       this.stepper.next();
     },
     error => {
@@ -54,13 +48,5 @@ export class RelookeuseInscriptionComponent implements OnInit {
           this.snackBar.open('Un problème est survenu lors de la connexion à l\'api! Veuillez réessayer!', 'Ok');
         }
     });
-  }
-
-  onSelectFile(event)
-  {
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    this.relookeuseApi.postApiRelookeusePictureId({File: event.target.files[0], id: 3})
-    console.log(event);
   }
 }

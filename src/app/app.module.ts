@@ -4,7 +4,7 @@ import {forwardRef, NgModule, Provider} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AccueilComponent } from './accueil/accueil.component';
 import {ApiModule} from './api/api.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import {
   MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule, MatProgressSpinnerModule,
   MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule,
   MatToolbarModule
@@ -24,6 +24,12 @@ import { RelookeuseInscriptionComponent } from './relookeuse-inscription/relooke
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {RequestInterceptor} from './api/RequestInterceptor';
+import { ChooseProfilPictureComponent } from './choose-profil-picture/choose-profil-picture.component';
+import { EditTarifsComponent } from './edit-tarifs/edit-tarifs.component';
+import { TarifComponent } from './tarif/tarif.component';
+import { EditAvailabilitiesComponent } from './edit-availabilities/edit-availabilities.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import { EditTarifPriceDialogComponent } from './edit-tarif-price-dialog/edit-tarif-price-dialog.component';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -38,7 +44,13 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     AccueilComponent,
     NavbarComponent,
     RelookeuseInscriptionComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    ChooseProfilPictureComponent,
+    EditTarifsComponent,
+    TarifComponent,
+    EditAvailabilitiesComponent,
+    AvailabilityComponent,
+    EditTarifPriceDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,10 +70,13 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MatDialogModule,
     MatStepperModule,
     MatSlideToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule,
+    FormsModule
   ],
   entryComponents:[
-    InfoDialogComponent
+    InfoDialogComponent,
+    EditTarifPriceDialogComponent
   ],
   providers: [
     RequestInterceptor,

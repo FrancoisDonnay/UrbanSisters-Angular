@@ -25,7 +25,8 @@ const routes: Routes = [
     component: RelookeuseInscriptionComponent,
     canActivate: [AuthenticationGuard],
     data: {
-      roleBlackList: 'relookeuse'
+      //todo
+      //roleBlackList: 'relookeuse'
     }
   }
 ];

@@ -8,6 +8,7 @@ import { DefaultService } from './services/default.service';
 import { InscriptionService } from './services/inscription.service';
 import { LoginService } from './services/login.service';
 import { RelookeuseService } from './services/relookeuse.service';
+import { TarifService } from './services/tarif.service';
 import { UserService } from './services/user.service';
 
 /**
@@ -28,6 +29,7 @@ import { UserService } from './services/user.service';
     InscriptionService,
     LoginService,
     RelookeuseService,
+    TarifService,
     UserService
   ],
 })

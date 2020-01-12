@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Changer le prix de {{data.service}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <form [formGroup]="newPriceGroup">
+      <input formControlName="price"  matInput placeholder="Prix" type="number">
+    </form>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annulé</button>
+  <button mat-button [mat-dialog-close]="newPriceGroup.value.price" [disabled]="!newPriceGroup.valid" cdkFocusInitial>Changer</button>
+</div>

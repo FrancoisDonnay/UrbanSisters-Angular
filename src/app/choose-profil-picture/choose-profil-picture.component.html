@@ -1,0 +1,8 @@
+<h1>Choisissez une photo de profile</h1>
+<form [formGroup]="pictureFormGroup">
+  <img *ngIf="pictureUrl" [src]="pictureUrl" alt="Profil picture">
+  <br>
+  <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Choisir une photo</button>
+  <button style="margin-left: 5px" type="button" *ngIf="pictureUrl" mat-raised-button color="accent" (click)="deletePicture()">Supprimer la photo</button>
+  <input hidden type="file" id="userFile" #fileInput formControlName="profilPicture" (change)="onSelectFile($event) " accept="image/png">
+</form>

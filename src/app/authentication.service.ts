@@ -52,7 +52,7 @@ export class AuthenticationService {
       const storedTokenExpiration = localStorage.getItem('tokenExpiration');
 
       if (storedToken && storedTokenExpiration && parseInt(storedTokenExpiration, 10) >= new Date().getTime() / 1000) {
-        this.setToken({access_token : storedToken, expire_at : parseInt(storedTokenExpiration, 10)}, false);
+        this.setToken({access_token : storedToken, expire_at : parseInt(storedTokenExpiration, 10)}, true);
         return true;
       } else {
         this.accessToken = null;
@@ -79,6 +79,6 @@ export class AuthenticationService {
   }
 
   public tokenIsExpirated(): boolean {
-    return this.accessToken.expire_at <= new Date().getTime() / 1000
+    return this.accessToken.expire_at <= new Date().getTime() / 1000;
   }
 }

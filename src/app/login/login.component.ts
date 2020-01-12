@@ -13,7 +13,7 @@ import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading: boolean = false;
+  loading = false;
 
   constructor(private apiLogin: LoginService,
               private authenticationService: AuthenticationService,

@@ -1,0 +1,18 @@
+<h1>Editer vos tarifs</h1>
+<mat-list>
+  <mat-list-item *ngFor="let tarif of tarifs">
+    <app-tarif [tarif] = "tarif" (removeTarif)="delete($event)"></app-tarif>
+  </mat-list-item>
+</mat-list>
+<p *ngIf="tarifs.length === 0">Vous n'avez pas de tarif</p>
+<form [formGroup]="newTarifGroup">
+    <mat-form-field style="padding-top: 10px">
+      <input matInput placeholder="Nom du service" type="text" formControlName="service"/>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 50px">
+      <input matInput placeholder="Prix" type="number" formControlName="price"/>
+    </mat-form-field>
+    <div>
+      <button mat-button (click)="addTarif()" [disabled]="!newTarifGroup.valid">Ajouter</button>
+    </div>
+</form>

@@ -8,8 +8,12 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { RelookeusePage } from '../models/relookeuse-page';
-import { JwtToken } from '../models/jwt-token';
+import { NewRelookeuse } from '../models/new-relookeuse';
 import { RelookeuseInscription } from '../models/relookeuse-inscription';
+import { DetailedRelookeuse } from '../models/detailed-relookeuse';
+import { Relookeuse } from '../models/relookeuse';
+import { ProfilPicture } from '../models/profil-picture';
+import { RelookeuseRowVersion } from '../models/relookeuse-row-version';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,8 +21,9 @@ class RelookeuseService extends __BaseService {
   static readonly getApiRelookeusePath = '/api/Relookeuse';
   static readonly postApiRelookeusePath = '/api/Relookeuse';
   static readonly getApiRelookeuseIdPath = '/api/Relookeuse/{id}';
-  static readonly postApiRelookeusePictureIdPath = '/api/Relookeuse/picture/{id}';
-  static readonly patchApiRelookeusePictureIdPath = '/api/Relookeuse/picture/{id}';
+  static readonly getApiRelookeuseMePath = '/api/Relookeuse/me';
+  static readonly patchApiRelookeusePicturePath = '/api/Relookeuse/picture';
+  static readonly deleteApiRelookeusePicturePath = '/api/Relookeuse/picture';
 
   constructor(
     config: __Configuration,
@@ -78,7 +83,7 @@ class RelookeuseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postApiRelookeuseResponse(body?: RelookeuseInscription): __Observable<__StrictHttpResponse<JwtToken>> {
+  postApiRelookeuseResponse(body?: RelookeuseInscription): __Observable<__StrictHttpResponse<NewRelookeuse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -96,7 +101,7 @@ class RelookeuseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<JwtToken>;
+        return _r as __StrictHttpResponse<NewRelookeuse>;
       })
     );
   }
@@ -104,16 +109,17 @@ class RelookeuseService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postApiRelookeuse(body?: RelookeuseInscription): __Observable<JwtToken> {
+  postApiRelookeuse(body?: RelookeuseInscription): __Observable<NewRelookeuse> {
     return this.postApiRelookeuseResponse(body).pipe(
-      __map(_r => _r.body as JwtToken)
+      __map(_r => _r.body as NewRelookeuse)
     );
   }
 
   /**
    * @param id undefined
+   * @return Success
    */
-  getApiRelookeuseIdResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+  getApiRelookeuseIdResponse(id: number): __Observable<__StrictHttpResponse<DetailedRelookeuse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -131,37 +137,30 @@ class RelookeuseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<DetailedRelookeuse>;
       })
     );
   }
   /**
    * @param id undefined
+   * @return Success
    */
-  getApiRelookeuseId(id: number): __Observable<null> {
+  getApiRelookeuseId(id: number): __Observable<DetailedRelookeuse> {
     return this.getApiRelookeuseIdResponse(id).pipe(
-      __map(_r => _r.body as null)
+      __map(_r => _r.body as DetailedRelookeuse)
     );
   }
 
   /**
-   * @param params The `RelookeuseService.PostApiRelookeusePictureIdParams` containing the following parameters:
-   *
-   * - `id`:
-   *
-   * - `File`:
+   * @return Success
    */
-  postApiRelookeusePictureIdResponse(params: RelookeuseService.PostApiRelookeusePictureIdParams): __Observable<__StrictHttpResponse<null>> {
+  getApiRelookeuseMeResponse(): __Observable<__StrictHttpResponse<Relookeuse>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    let __formData = new FormData();
-    __body = __formData;
-
-    if (params.File != null) { __formData.append('File', params.File as string | Blob);}
     let req = new HttpRequest<any>(
-      'POST',
-      this.rootUrl + `/api/Relookeuse/picture/${params.id}`,
+      'GET',
+      this.rootUrl + `/api/Relookeuse/me`,
       __body,
       {
         headers: __headers,
@@ -172,41 +171,39 @@ class RelookeuseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<Relookeuse>;
       })
     );
   }
   /**
-   * @param params The `RelookeuseService.PostApiRelookeusePictureIdParams` containing the following parameters:
-   *
-   * - `id`:
-   *
-   * - `File`:
+   * @return Success
    */
-  postApiRelookeusePictureId(params: RelookeuseService.PostApiRelookeusePictureIdParams): __Observable<null> {
-    return this.postApiRelookeusePictureIdResponse(params).pipe(
-      __map(_r => _r.body as null)
+  getApiRelookeuseMe(): __Observable<Relookeuse> {
+    return this.getApiRelookeuseMeResponse().pipe(
+      __map(_r => _r.body as Relookeuse)
     );
   }
 
   /**
-   * @param params The `RelookeuseService.PatchApiRelookeusePictureIdParams` containing the following parameters:
+   * @param params The `RelookeuseService.PatchApiRelookeusePictureParams` containing the following parameters:
    *
-   * - `id`:
+   * - `RowVersion`:
    *
    * - `File`:
+   *
+   * @return Success
    */
-  patchApiRelookeusePictureIdResponse(params: RelookeuseService.PatchApiRelookeusePictureIdParams): __Observable<__StrictHttpResponse<null>> {
+  patchApiRelookeusePictureResponse(params: RelookeuseService.PatchApiRelookeusePictureParams): __Observable<__StrictHttpResponse<ProfilPicture>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
     let __formData = new FormData();
     __body = __formData;
-
+    if (params.RowVersion != null) { __formData.append('RowVersion', params.RowVersion as string | Blob);}
     if (params.File != null) { __formData.append('File', params.File as string | Blob);}
     let req = new HttpRequest<any>(
       'PATCH',
-      this.rootUrl + `/api/Relookeuse/picture/${params.id}`,
+      this.rootUrl + `/api/Relookeuse/picture`,
       __body,
       {
         headers: __headers,
@@ -217,20 +214,58 @@ class RelookeuseService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<ProfilPicture>;
       })
     );
   }
   /**
-   * @param params The `RelookeuseService.PatchApiRelookeusePictureIdParams` containing the following parameters:
+   * @param params The `RelookeuseService.PatchApiRelookeusePictureParams` containing the following parameters:
    *
-   * - `id`:
+   * - `RowVersion`:
    *
    * - `File`:
+   *
+   * @return Success
    */
-  patchApiRelookeusePictureId(params: RelookeuseService.PatchApiRelookeusePictureIdParams): __Observable<null> {
-    return this.patchApiRelookeusePictureIdResponse(params).pipe(
-      __map(_r => _r.body as null)
+  patchApiRelookeusePicture(params: RelookeuseService.PatchApiRelookeusePictureParams): __Observable<ProfilPicture> {
+    return this.patchApiRelookeusePictureResponse(params).pipe(
+      __map(_r => _r.body as ProfilPicture)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  deleteApiRelookeusePictureResponse(body?: RelookeuseRowVersion): __Observable<__StrictHttpResponse<RelookeuseRowVersion>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/api/Relookeuse/picture`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<RelookeuseRowVersion>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  deleteApiRelookeusePicture(body?: RelookeuseRowVersion): __Observable<RelookeuseRowVersion> {
+    return this.deleteApiRelookeusePictureResponse(body).pipe(
+      __map(_r => _r.body as RelookeuseRowVersion)
     );
   }
 }
@@ -246,18 +281,10 @@ module RelookeuseService {
   }
 
   /**
-   * Parameters for postApiRelookeusePictureId
+   * Parameters for patchApiRelookeusePicture
    */
-  export interface PostApiRelookeusePictureIdParams {
-    id: number;
-    File: string;
-  }
-
-  /**
-   * Parameters for patchApiRelookeusePictureId
-   */
-  export interface PatchApiRelookeusePictureIdParams {
-    id: number;
+  export interface PatchApiRelookeusePictureParams {
+    RowVersion: string;
     File: string;
   }
 }
