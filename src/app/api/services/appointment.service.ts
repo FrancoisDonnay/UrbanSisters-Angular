@@ -9,14 +9,19 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { AppointmentPage } from '../models/appointment-page';
 import { AppointmentRequest } from '../models/appointment-request';
+import { AppointmentProPage } from '../models/appointment-pro-page';
 import { Rating } from '../models/rating';
+import { AppointmentRowVersion } from '../models/appointment-row-version';
+import { AppointmentStatusChange } from '../models/appointment-status-change';
 @Injectable({
   providedIn: 'root',
 })
 class AppointmentService extends __BaseService {
   static readonly getApiAppointmentPath = '/api/Appointment';
   static readonly postApiAppointmentPath = '/api/Appointment';
+  static readonly getApiAppointmentProPath = '/api/Appointment/pro';
   static readonly patchApiAppointmentIdClosePath = '/api/Appointment/{id}/close';
+  static readonly patchApiAppointmentIdPath = '/api/Appointment/{id}';
 
   constructor(
     config: __Configuration,
@@ -28,8 +33,6 @@ class AppointmentService extends __BaseService {
   /**
    * @param params The `AppointmentService.GetApiAppointmentParams` containing the following parameters:
    *
-   * - `pro`:
-   *
    * - `pageSize`:
    *
    * - `pageIndex`:
@@ -40,7 +43,6 @@ class AppointmentService extends __BaseService {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    if (params.pro != null) __params = __params.set('pro', params.pro.toString());
     if (params.pageSize != null) __params = __params.set('pageSize', params.pageSize.toString());
     if (params.pageIndex != null) __params = __params.set('pageIndex', params.pageIndex.toString());
     let req = new HttpRequest<any>(
@@ -62,8 +64,6 @@ class AppointmentService extends __BaseService {
   }
   /**
    * @param params The `AppointmentService.GetApiAppointmentParams` containing the following parameters:
-   *
-   * - `pro`:
    *
    * - `pageSize`:
    *
@@ -112,6 +112,53 @@ class AppointmentService extends __BaseService {
   }
 
   /**
+   * @param params The `AppointmentService.GetApiAppointmentProParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getApiAppointmentProResponse(params: AppointmentService.GetApiAppointmentProParams): __Observable<__StrictHttpResponse<AppointmentProPage>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (params.pageSize != null) __params = __params.set('pageSize', params.pageSize.toString());
+    if (params.pageIndex != null) __params = __params.set('pageIndex', params.pageIndex.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/api/Appointment/pro`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<AppointmentProPage>;
+      })
+    );
+  }
+  /**
+   * @param params The `AppointmentService.GetApiAppointmentProParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getApiAppointmentPro(params: AppointmentService.GetApiAppointmentProParams): __Observable<AppointmentProPage> {
+    return this.getApiAppointmentProResponse(params).pipe(
+      __map(_r => _r.body as AppointmentProPage)
+    );
+  }
+
+  /**
    * @param params The `AppointmentService.PatchApiAppointmentIdCloseParams` containing the following parameters:
    *
    * - `id`:
@@ -153,6 +200,53 @@ class AppointmentService extends __BaseService {
       __map(_r => _r.body as null)
     );
   }
+
+  /**
+   * @param params The `AppointmentService.PatchApiAppointmentIdParams` containing the following parameters:
+   *
+   * - `id`:
+   *
+   * - `body`:
+   *
+   * @return Success
+   */
+  patchApiAppointmentIdResponse(params: AppointmentService.PatchApiAppointmentIdParams): __Observable<__StrictHttpResponse<AppointmentRowVersion>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    __body = params.body;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/api/Appointment/${params.id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<AppointmentRowVersion>;
+      })
+    );
+  }
+  /**
+   * @param params The `AppointmentService.PatchApiAppointmentIdParams` containing the following parameters:
+   *
+   * - `id`:
+   *
+   * - `body`:
+   *
+   * @return Success
+   */
+  patchApiAppointmentId(params: AppointmentService.PatchApiAppointmentIdParams): __Observable<AppointmentRowVersion> {
+    return this.patchApiAppointmentIdResponse(params).pipe(
+      __map(_r => _r.body as AppointmentRowVersion)
+    );
+  }
 }
 
 module AppointmentService {
@@ -161,7 +255,14 @@ module AppointmentService {
    * Parameters for getApiAppointment
    */
   export interface GetApiAppointmentParams {
-    pro?: boolean;
+    pageSize?: number;
+    pageIndex?: number;
+  }
+
+  /**
+   * Parameters for getApiAppointmentPro
+   */
+  export interface GetApiAppointmentProParams {
     pageSize?: number;
     pageIndex?: number;
   }
@@ -172,6 +273,14 @@ module AppointmentService {
   export interface PatchApiAppointmentIdCloseParams {
     id: number;
     body?: Rating;
+  }
+
+  /**
+   * Parameters for patchApiAppointmentId
+   */
+  export interface PatchApiAppointmentIdParams {
+    id: number;
+    body?: AppointmentStatusChange;
   }
 }
 

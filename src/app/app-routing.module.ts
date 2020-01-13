@@ -7,6 +7,7 @@ import {RelookeuseInscriptionComponent} from './relookeuse-inscription/relookeus
 import {StatsComponent} from './stats/stats.component';
 import {UsersListComponent} from './users-list/users-list.component';
 import {ProfilComponent} from './profil/profil.component';
+import {AppoitmentComponent} from './appoitment/appoitment.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,14 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent,
+    canActivate: [AuthenticationGuard],
+    data: {
+      roleWhitelist: 'relookeuse'
+    }
+  },
+  {
+    path: 'appointments',
+    component: AppoitmentComponent,
     canActivate: [AuthenticationGuard],
     data: {
       roleWhitelist: 'relookeuse'

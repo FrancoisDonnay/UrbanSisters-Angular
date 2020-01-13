@@ -37,6 +37,8 @@ import { UsersListComponent } from './users-list/users-list.component';
 import {ChartsModule} from 'ng2-charts';
 import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
 import { ProfilComponent } from './profil/profil.component';
+import { AppoitmentComponent } from './appoitment/appoitment.component';
+import { AppointmentCancelDialogueComponent } from './appointment-cancel-dialogue/appointment-cancel-dialogue.component';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -63,7 +65,9 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     StatsComponent,
     UsersListComponent,
     EditPortfolioComponent,
-    ProfilComponent
+    ProfilComponent,
+    AppoitmentComponent,
+    AppointmentCancelDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +100,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
   entryComponents:[
     InfoDialogComponent,
     EditTarifPriceDialogComponent,
-    EditAvailabilityHourDialogComponent
+    EditAvailabilityHourDialogComponent,
+    AppointmentCancelDialogueComponent
   ],
   providers: [
     RequestInterceptor,

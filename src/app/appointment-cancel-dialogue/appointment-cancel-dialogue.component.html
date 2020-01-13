@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Message d'annulation</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <form [formGroup]="messageGroup">
+      <input formControlName="message"  matInput placeholder="Message de refus" type="text">
+    </form>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annulé</button>
+  <button mat-button [mat-dialog-close]="messageGroup.value.message" [disabled]="!messageGroup.valid">Clôturer le rendez-vous</button>
+</div>

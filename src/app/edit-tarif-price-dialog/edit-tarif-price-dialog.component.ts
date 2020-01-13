@@ -10,7 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./edit-tarif-price-dialog.component.css']
 })
 export class EditTarifPriceDialogComponent implements OnInit{
-  newPriceGroup: FormGroup
+  newPriceGroup: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<EditTarifsComponent>,

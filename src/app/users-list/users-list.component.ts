@@ -45,8 +45,6 @@ export class UsersListComponent implements OnInit {
   }
 
   setAdmin(user: User, event) {
-    console.log(user);
-    console.log(event);
     this.userApi.patchApiUserAdmin({id: user.id, isAdmin: event.checked, rowVersion: user.rowVersion}).subscribe(ok => {
       user.rowVersion = ok.rowVersion;
     }, error => {

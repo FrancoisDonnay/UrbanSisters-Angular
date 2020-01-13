@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tarif} from '../api/models/tarif';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {EditTarifPriceDialogComponent} from '../edit-tarif-price-dialog/edit-tarif-price-dialog.component';
 import {TarifService} from '../api/services/tarif.service';

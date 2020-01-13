@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {StatsService} from '../api/services';
 import {AuthenticationService} from '../authentication.service';
 import {MatSnackBar} from '@angular/material';
-import {Stats} from '../api/models';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 import {ChartOptions, ChartType} from 'chart.js';
 

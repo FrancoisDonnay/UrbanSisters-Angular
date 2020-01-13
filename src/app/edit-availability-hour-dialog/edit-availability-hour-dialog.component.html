@@ -11,5 +11,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="dialogRef.close()">Annulé</button>
-  <button mat-button [mat-dialog-close]="{startTime: newAvailabilityHours.value.startTime, endTime: newAvailabilityHours.value.endTime}" [disabled]="!newAvailabilityHours.valid" cdkFocusInitial>Changer</button>
+  <button mat-button [mat-dialog-close]="{startTime: newAvailabilityHours.value.startTime, endTime: newAvailabilityHours.value.endTime}" [disabled]="!newAvailabilityHours.valid">Changer</button>
 </div>
