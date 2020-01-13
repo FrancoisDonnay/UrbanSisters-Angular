@@ -6,6 +6,7 @@ import {AccueilComponent} from './accueil/accueil.component';
 import {RelookeuseInscriptionComponent} from './relookeuse-inscription/relookeuse-inscription.component';
 import {StatsComponent} from './stats/stats.component';
 import {UsersListComponent} from './users-list/users-list.component';
+import {ProfilComponent} from './profil/profil.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,14 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard],
     data: {
       roleBlackList: 'relookeuse'
+    }
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent,
+    canActivate: [AuthenticationGuard],
+    data: {
+      roleWhitelist: 'relookeuse'
     }
   }
 ];

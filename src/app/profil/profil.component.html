@@ -1,0 +1,21 @@
+<h1>Mon Profil</h1>
+<mat-tab-group *ngIf="!loading">
+  <mat-tab label="Mes infos">
+    <form [formGroup]="infoGroup" style="text-align: center">
+      <ng-template matStepLabel>Inscrivez-vous en tant que relookeuse</ng-template>
+      <mat-slide-toggle color="primary" [checked]="relookeuse.isPro" (change)="relookeuse.isPro = $event.checked" style="padding-top: 25px">Pro</mat-slide-toggle>
+      <br>
+      <mat-form-field style="padding-top: 10px">
+        <textarea matInput placeholder="Votre description" formControlName="description" [value]="relookeuse.description"></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button (click)="enregister()" [disabled]="!infoGroup.valid || lock">Enregister</button>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab label="Photo de profil"><app-choose-profil-picture [pictureUrl] = relookeuse.picture [rowVersion] = "rowVersion" (rowVersionUpdate)="rowVersion = $event" style="text-align: center"></app-choose-profil-picture></mat-tab>
+  <mat-tab label="Tarifs"><app-edit-tarifs style="text-align: center"></app-edit-tarifs></mat-tab>
+  <mat-tab label="Horaires"><app-edit-availabilities style="text-align: center"></app-edit-availabilities></mat-tab>
+  <mat-tab label="Portfolio"><app-edit-portfolio style="text-align: center;"></app-edit-portfolio></mat-tab>
+</mat-tab-group>
+<mat-spinner *ngIf="loading"></mat-spinner>

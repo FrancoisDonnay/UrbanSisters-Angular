@@ -8,17 +8,19 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { RelookeusePage } from '../models/relookeuse-page';
+import { RelookeuseRowVersion } from '../models/relookeuse-row-version';
+import { EditRelookeuse } from '../models/edit-relookeuse';
 import { NewRelookeuse } from '../models/new-relookeuse';
 import { RelookeuseInscription } from '../models/relookeuse-inscription';
 import { DetailedRelookeuse } from '../models/detailed-relookeuse';
 import { Relookeuse } from '../models/relookeuse';
 import { ProfilPicture } from '../models/profil-picture';
-import { RelookeuseRowVersion } from '../models/relookeuse-row-version';
 @Injectable({
   providedIn: 'root',
 })
 class RelookeuseService extends __BaseService {
   static readonly getApiRelookeusePath = '/api/Relookeuse';
+  static readonly patchApiRelookeusePath = '/api/Relookeuse';
   static readonly postApiRelookeusePath = '/api/Relookeuse';
   static readonly getApiRelookeuseIdPath = '/api/Relookeuse/{id}';
   static readonly getApiRelookeuseMePath = '/api/Relookeuse/me';
@@ -76,6 +78,42 @@ class RelookeuseService extends __BaseService {
   getApiRelookeuse(params: RelookeuseService.GetApiRelookeuseParams): __Observable<RelookeusePage> {
     return this.getApiRelookeuseResponse(params).pipe(
       __map(_r => _r.body as RelookeusePage)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  patchApiRelookeuseResponse(body?: EditRelookeuse): __Observable<__StrictHttpResponse<RelookeuseRowVersion>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/api/Relookeuse`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<RelookeuseRowVersion>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  patchApiRelookeuse(body?: EditRelookeuse): __Observable<RelookeuseRowVersion> {
+    return this.patchApiRelookeuseResponse(body).pipe(
+      __map(_r => _r.body as RelookeuseRowVersion)
     );
   }
 

@@ -10,6 +10,8 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 import { User } from '../models/user';
 import { UserPage } from '../models/user-page';
 import { UserChange } from '../models/user-change';
+import { UserRowVersion } from '../models/user-row-version';
+import { SetAdminValue } from '../models/set-admin-value';
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +19,7 @@ class UserService extends __BaseService {
   static readonly getApiUserMePath = '/api/User/me';
   static readonly getApiUserPath = '/api/User';
   static readonly patchApiUserPath = '/api/User';
+  static readonly patchApiUserAdminPath = '/api/User/admin';
 
   constructor(
     config: __Configuration,
@@ -138,6 +141,42 @@ class UserService extends __BaseService {
   patchApiUser(body?: UserChange): __Observable<User> {
     return this.patchApiUserResponse(body).pipe(
       __map(_r => _r.body as User)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  patchApiUserAdminResponse(body?: SetAdminValue): __Observable<__StrictHttpResponse<UserRowVersion>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PATCH',
+      this.rootUrl + `/api/User/admin`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserRowVersion>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  patchApiUserAdmin(body?: SetAdminValue): __Observable<UserRowVersion> {
+    return this.patchApiUserAdminResponse(body).pipe(
+      __map(_r => _r.body as UserRowVersion)
     );
   }
 }

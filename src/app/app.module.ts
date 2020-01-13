@@ -17,7 +17,7 @@ import {
   MatIconModule,
   MatInputModule, MatListModule,
   MatMenuModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatTableModule,
+  MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import { RelookeuseInscriptionComponent } from './relookeuse-inscription/relookeuse-inscription.component';
@@ -36,6 +36,7 @@ import { StatsComponent } from './stats/stats.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import {ChartsModule} from 'ng2-charts';
 import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
+import { ProfilComponent } from './profil/profil.component';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -61,7 +62,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     DayOfWeekPipe,
     StatsComponent,
     UsersListComponent,
-    EditPortfolioComponent
+    EditPortfolioComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,8 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MatTableModule,
     ChartsModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
   ],
   entryComponents:[
     InfoDialogComponent,

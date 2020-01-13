@@ -2,6 +2,7 @@
   <mat-toolbar-row class="navbar">
     <span>UrbanSisters</span>
     <button mat-button routerLink="/">Accueil</button>
+    <button *ngIf="authService.isRelookeuse()" mat-button routerLink="/profil">Mon Profil</button>
     <button *ngIf="authService.isAdmin()" mat-button [matMenuTriggerFor]="adminMenu">Administration</button>
     <mat-menu #adminMenu="matMenu" yPosition="below">
       <button mat-menu-item routerLink="/users">Liste des utilisateurs</button>
