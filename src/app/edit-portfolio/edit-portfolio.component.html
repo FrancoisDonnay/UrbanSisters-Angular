@@ -1,0 +1,16 @@
+<h1>Choisissez une photo pour votre portefolio</h1>
+<mat-grid-list cols="3" rowHeight="350px" *ngIf="pictureList.length != 0">
+  <mat-grid-tile *ngFor="let picture of pictureList">
+    <mat-card class="card">
+      <img mat-card-image [src]="picture.picture">
+      <mat-card-actions style="text-align:center">
+        <button mat-raised-button color="primary" (click)="deletePicture(picture)">Supprimer</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<br>
+<form [formGroup]="pictureFormGroup">
+  <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Ajouter une photo</button>
+  <input hidden type="file" id="userFile" #fileInput formControlName="profilPicture" (change)="onSelectFile($event) " accept="image/png">
+</form>

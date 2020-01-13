@@ -5,5 +5,6 @@ export { InscriptionService } from './services/inscription.service';
 export { LoginService } from './services/login.service';
 export { PortfolioService } from './services/portfolio.service';
 export { RelookeuseService } from './services/relookeuse.service';
+export { StatsService } from './services/stats.service';
 export { TarifService } from './services/tarif.service';
 export { UserService } from './services/user.service';

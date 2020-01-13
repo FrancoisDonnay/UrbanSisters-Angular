@@ -24,8 +24,7 @@ export class EditTarifsComponent implements OnInit {
       price: new FormControl(null, [Validators.required, Validators.min(0)])
     });
 
-    if(!this.newRelookeuse)
-    {
+    if(!this.newRelookeuse) {
       this.tarifApi.getApiTarif().subscribe(ok => {
         this.tarifs = ok;
       }, error => {

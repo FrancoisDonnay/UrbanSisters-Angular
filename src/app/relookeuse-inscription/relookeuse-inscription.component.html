@@ -45,17 +45,22 @@
   </mat-step>
   <mat-step optional>
     <ng-template matStepLabel>Ajouter des photos dans votre portefolio</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Précédent</button>
-      <button mat-button matStepperNext>Suivant</button>
+    <div class="content">
+      <app-edit-portfolio newRelookeuse="true"></app-edit-portfolio>
+      <div>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button mat-button matStepperNext>Suivant</button>
+      </div>
     </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Bravo</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperNext>Suivant</button>
+    <div class="content">
+      <p style="font-size: 32px">Bravo! Vous êtes maintenant une relookeuse d'UrbanSisters!</p>
+      <button style="margin-top: 50px; margin-bottom: 10px" mat-raised-button color="primary" routerLink="/">Commencer l'aventure!</button>
+      <div>
+        <button mat-button matStepperPrevious>Précédent</button>
+      </div>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

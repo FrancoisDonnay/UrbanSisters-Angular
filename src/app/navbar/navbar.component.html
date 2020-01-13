@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row class="navbar">
     <span>UrbanSisters</span>
-    <button mat-button [matMenuTriggerFor]="belowMenu">About Us</button>
-    <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item>Project Plan</button>
-      <button mat-menu-item>Current Progress</button>
+    <button mat-button routerLink="/">Accueil</button>
+    <button *ngIf="authService.isAdmin()" mat-button [matMenuTriggerFor]="adminMenu">Administration</button>
+    <mat-menu #adminMenu="matMenu" yPosition="below">
+      <button mat-menu-item routerLink="/users">Liste des utilisateurs</button>
+      <button mat-menu-item routerLink="/stats">Statistiques</button>
     </mat-menu>
-
     <button mat-button (click)="authService.logout();">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>

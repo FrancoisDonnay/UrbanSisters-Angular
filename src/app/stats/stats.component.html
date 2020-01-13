@@ -1,0 +1,26 @@
+<h1>Statistiques</h1>
+<div *ngIf="!loading">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile colspan="1" rowspan="1">
+      Nombre de personnes inscrites : {{clientCount}}
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      Nombre moyen de rendez-vous d'une relookeuse : {{avgNumberAppointment}}
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+      Note moyenne des relookeuse : {{avgRelookeuseMark}} ⭐
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div style="display: block;" id="chart">
+    <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [chartType]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+    </canvas>
+  </div>
+</div>
+<mat-spinner *ngIf="loading"></mat-spinner>

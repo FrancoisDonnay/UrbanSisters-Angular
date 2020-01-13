@@ -10,6 +10,7 @@ import { InscriptionService } from './services/inscription.service';
 import { LoginService } from './services/login.service';
 import { PortfolioService } from './services/portfolio.service';
 import { RelookeuseService } from './services/relookeuse.service';
+import { StatsService } from './services/stats.service';
 import { TarifService } from './services/tarif.service';
 import { UserService } from './services/user.service';
 
@@ -33,6 +34,7 @@ import { UserService } from './services/user.service';
     LoginService,
     PortfolioService,
     RelookeuseService,
+    StatsService,
     TarifService,
     UserService
   ],

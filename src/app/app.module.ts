@@ -11,13 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatCheckboxModule, MatDialogModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatGridListModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatMenuModule, MatProgressSpinnerModule,
-  MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule,
+  MatMenuModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatSelectModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { RelookeuseInscriptionComponent } from './relookeuse-inscription/relookeuse-inscription.component';
@@ -32,6 +32,10 @@ import { AvailabilityComponent } from './availability/availability.component';
 import { EditTarifPriceDialogComponent } from './edit-tarif-price-dialog/edit-tarif-price-dialog.component';
 import { EditAvailabilityHourDialogComponent } from './edit-availability-hour-dialog/edit-availability-hour-dialog.component';
 import { DayOfWeekPipe } from './day-of-week.pipe';
+import { StatsComponent } from './stats/stats.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import {ChartsModule} from 'ng2-charts';
+import { EditPortfolioComponent } from './edit-portfolio/edit-portfolio.component';
 
 export const API_INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -54,7 +58,10 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     AvailabilityComponent,
     EditTarifPriceDialogComponent,
     EditAvailabilityHourDialogComponent,
-    DayOfWeekPipe
+    DayOfWeekPipe,
+    StatsComponent,
+    UsersListComponent,
+    EditPortfolioComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,12 @@ export const API_INTERCEPTOR_PROVIDER: Provider = {
     MatSlideToggleModule,
     MatSnackBarModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    ChartsModule,
+    MatGridListModule,
+    MatCardModule
   ],
   entryComponents:[
     InfoDialogComponent,

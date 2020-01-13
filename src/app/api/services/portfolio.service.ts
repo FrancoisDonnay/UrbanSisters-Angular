@@ -8,7 +8,6 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { PortfolioPicture } from '../models/portfolio-picture';
-import { ProfilPicture } from '../models/profil-picture';
 @Injectable({
   providedIn: 'root',
 })
@@ -61,7 +60,7 @@ class PortfolioService extends __BaseService {
    * @param File undefined
    * @return Success
    */
-  postApiPortfolioResponse(File: string): __Observable<__StrictHttpResponse<ProfilPicture>> {
+  postApiPortfolioResponse(File: string): __Observable<__StrictHttpResponse<PortfolioPicture>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -81,7 +80,7 @@ class PortfolioService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<ProfilPicture>;
+        return _r as __StrictHttpResponse<PortfolioPicture>;
       })
     );
   }
@@ -89,9 +88,9 @@ class PortfolioService extends __BaseService {
    * @param File undefined
    * @return Success
    */
-  postApiPortfolio(File: string): __Observable<ProfilPicture> {
+  postApiPortfolio(File: string): __Observable<PortfolioPicture> {
     return this.postApiPortfolioResponse(File).pipe(
-      __map(_r => _r.body as ProfilPicture)
+      __map(_r => _r.body as PortfolioPicture)
     );
   }
 

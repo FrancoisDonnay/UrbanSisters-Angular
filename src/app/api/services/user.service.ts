@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { User } from '../models/user';
+import { UserPage } from '../models/user-page';
 import { UserChange } from '../models/user-change';
 @Injectable({
   providedIn: 'root',
@@ -58,12 +59,20 @@ class UserService extends __BaseService {
   }
 
   /**
+   * @param params The `UserService.GetApiUserParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
    * @return Success
    */
-  getApiUserResponse(): __Observable<__StrictHttpResponse<Array<User>>> {
+  getApiUserResponse(params: UserService.GetApiUserParams): __Observable<__StrictHttpResponse<UserPage>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    if (params.pageSize != null) __params = __params.set('pageSize', params.pageSize.toString());
+    if (params.pageIndex != null) __params = __params.set('pageIndex', params.pageIndex.toString());
     let req = new HttpRequest<any>(
       'GET',
       this.rootUrl + `/api/User`,
@@ -77,16 +86,22 @@ class UserService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<User>>;
+        return _r as __StrictHttpResponse<UserPage>;
       })
     );
   }
   /**
+   * @param params The `UserService.GetApiUserParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
    * @return Success
    */
-  getApiUser(): __Observable<Array<User>> {
-    return this.getApiUserResponse().pipe(
-      __map(_r => _r.body as Array<User>)
+  getApiUser(params: UserService.GetApiUserParams): __Observable<UserPage> {
+    return this.getApiUserResponse(params).pipe(
+      __map(_r => _r.body as UserPage)
     );
   }
 
@@ -128,6 +143,14 @@ class UserService extends __BaseService {
 }
 
 module UserService {
+
+  /**
+   * Parameters for getApiUser
+   */
+  export interface GetApiUserParams {
+    pageSize?: number;
+    pageIndex?: number;
+  }
 }
 
 export { UserService }

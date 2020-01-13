@@ -9,15 +9,13 @@ import {Router} from '@angular/router';
 export class AuthenticationService {
 
   private accessToken: JwtToken;
-  private roles: Array<string>;
+  private roles = new Array<string>();
   constructor(private router: Router) { }
 
   public setToken(token: JwtToken, rememberMe: boolean) {
     this.accessToken = token;
     const tokenDecoded = decode(token.access_token);
-    if (tokenDecoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === undefined) {
-      this.roles = [];
-    } else {
+    if (tokenDecoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] !== undefined) {
       if (typeof tokenDecoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'string') {
         this.roles = [tokenDecoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']];
       } else {
